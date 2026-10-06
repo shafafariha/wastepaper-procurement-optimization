@@ -3,14 +3,12 @@
 [![Paper Status](https://img.shields.io/badge/Research%20Paper-Accepted%20(Forthcoming)-0052CC?style=for-the-badge&logo=googlescholar&logoColor=white)](#-academic-publication--status)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Econometrics](https://img.shields.io/badge/Statsmodels-Discrete%20Choice-4B8BBE?style=for-the-badge)](https://www.statsmodels.org/)
-[![Game Theory](https://img.shields.io/badge/Game%20Theory-Nash%20Equilibrium-darkgreen?style=for-the-badge)](#-stage-3-game-theoretic-competitive-optimization)
-[![Risk Analysis](https://img.shields.io/badge/Monte%20Carlo-10%2C000%20Simulations-orange?style=for-the-badge)](#-stage-4-monte-carlo-simulation--risk-analysis)
+[![Game Theory](https://img.shields.io/badge/Game%20Theory-Nash%20Equilibrium-darkgreen?style=for-the-badge)](#stage-3-game-theoretic-competitive-formulation)
+[![Risk Analysis](https://img.shields.io/badge/Monte%20Carlo-Risk%20Simulation-orange?style=for-the-badge)](#stage-4-monte-carlo-risk--uncertainty-quantification)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-> **Applied Research in Supply Chain Management & Industrial Operations Research**  
-> **Authors**: Shafa Fariha Tsuraya ([@shafafariha](https://github.com/shafafariha)) & Dr. Noviyanti Santoso  
-> **Affiliation**: Business Statistics, Faculty of Vocational Studies, Institut Teknologi Sepuluh Nopember (ITS), Surabaya, Indonesia  
-> **Industrial Context**: Developed from field market research and procurement operations during an internship as **Market Research Analyst** at **Baling Center (BC)**, Pulp & Paper Manufacturing Industry (APP Group).
+> **Author**: Shafa Fariha Tsuraya ([@shafafariha](https://github.com/shafafariha))  
+> **Industrial Context**: Developed from field market research and procurement operations during an internship as **Market Research Analyst** at **Baling Center (BC)**, Pulp & Paper Manufacturing Industry.
 
 ---
 
@@ -43,7 +41,7 @@ This project delivers an **end-to-end behavioral procurement optimization framew
 1. **Behavioral Choice Estimation**: Quantifies supplier utility and decision determinants using **Binary Logistic Discrete Choice Modeling (DCM)** rooted in **Random Utility Theory (McFadden, 1974)**.
 2. **Price & Volume Optimization**: Simulates procurement volume expansion against gross processing margin trade-offs across candidate pricing intervals.
 3. **Strategic Game Formulation**: Analyzes simultaneous competitive dynamics between the Baling Center and regional competitors under varying supplier price sensitivities using **Non-Cooperative Game Theory and Best-Response Analysis**.
-4. **Stochastic Risk Quantification**: Validates financial robustness via **10,000 Monte Carlo simulation runs** subjected to coupled volume and participation probability shocks.
+4. **Stochastic Risk Quantification**: Validates financial robustness via **Monte Carlo simulations** subjected to coupled volume and participation probability shocks.
 
 ---
 
@@ -52,7 +50,7 @@ This project delivers an **end-to-end behavioral procurement optimization framew
 This project corresponds to the empirical methodology and analytical framework developed in the following academic research:
 
 > **Title**: *Integrating Discrete Choice Modeling and Game Theoretic Optimization for Supplier Selection and Procurement Strategy in Wastepaper Recycling Supply Chains*  
-> **Authors**: Shafa Fariha Tsuraya\* and Noviyanti Santoso  
+> **Author**: Shafa Fariha Tsuraya\*  
 > **Status**: **Accepted for Publication in a Peer-Reviewed Academic Journal (Forthcoming)**  
 > **Publication Notice**: Full publication details, official digital object identifier (DOI), and volume/issue citations will be updated in this repository upon official release.
 
@@ -66,14 +64,14 @@ This project corresponds to the empirical methodology and analytical framework d
 > 
 > To safeguard commercial confidentiality, trade secrets, proprietary cost structures, and supplier identities:
 > - **Zero Exposure of Raw Commercial Records**: The primary confidential dataset (`Field Research.csv`), individual supplier names, GPS coordinates, and exact transactional cost accounting are strictly omitted from public repositories.
-> - **Public Overview & Normalized Metrics**: All regression outputs, marginal effects, payoff matrices, and simulation statistics presented in this documentation are reported in **generalized, normalized, or high-level aggregated form**.
+> - **Public Overview & Normalized Insights**: All econometric discussions, game-theoretic conclusions, and simulation insights presented in this documentation are reported in **generalized, qualitative, and high-level conceptual terms without citing proprietary commercial numbers**.
 > - **Synthetic / Dummy Data Generator Provided**: A synthetic dataset generator script is provided in this repository (`generate_synthetic_data.py`), allowing researchers and engineers to reproduce the complete statistical and game-theoretic pipeline without violating corporate data governance protocols.
 
 ---
 
 ## 🏭 Industry Background & Problem Statement
 
-```
+```plaintext
 [ Informal Collectors / Waste Banks / Aggregators ]
                      │
                      ▼ (Multi-attribute decision: Price, Distance, Payment, Pickup)
@@ -95,36 +93,29 @@ Recovered paper is an indispensable circular feedstock for paper packaging manuf
 
 ## 🔄 Integrated Decision Framework Architecture
 
-The framework synthesizes behavioral econometrics, mathematical optimization, game-theoretic strategy, and stochastic risk analysis into a unified decision workflow:
+The framework synthesizes behavioral econometrics, mathematical optimization, game-theoretic strategy, and stochastic risk analysis into a sequential four-stage decision workflow:
 
-```mermaid
-flowchart TD
-    subgraph S1["Stage 1: Econometric Behavioral Modeling"]
-        A["Field Market Research Survey<br/>(101 Suppliers)"] --> B["Feature Engineering & Diagnostics<br/>(VIF, Quality Index, Margins)"]
-        B --> C["Binary Logistic Regression<br/>(Backward Stepwise AIC Selection)"]
-        C --> D["Validation & Diagnostics<br/>(ROC-AUC = 0.790, Accuracy = 77.2%)"]
-        D --> E["Odds Ratios & Average Marginal Effects"]
-    end
+1. **Stage 1: Econometric Behavioral Modeling**
+   - Conduct empirical field market research surveying active wastepaper suppliers across economic, logistical, quality, and operational attributes.
+   - Execute feature engineering and multicollinearity diagnostics (Variance Inflation Factor analysis).
+   - Calibrate binary logistic regression using Maximum Likelihood Estimation with backward stepwise model selection guided by the Akaike Information Criterion (AIC).
+   - Evaluate model fit, odds ratios, and average marginal effects to identify primary drivers of supplier choice.
 
-    subgraph S2["Stage 2: Price & Volume Optimization"]
-        E --> F["Price Sensitivity Scenarios<br/>(ΔP: -100 to +200 IDR/kg)"]
-        F --> G["Expected Volume & Margin Calculation<br/>E[Volume] × (Selling Price - Purchase Price)"]
-        G --> H["Deterministic Price-Only Optimum"]
-    end
+2. **Stage 2: Price & Volume Optimization**
+   - Model the trade-off between purchase price adjustments, supplier conversion probabilities, and operational margins.
+   - Compute expected acquired procurement volume as a probability-weighted function of supplier capacity.
+   - Evaluate single-agent procurement profit curves across simulated pricing scenarios.
 
-    subgraph S3["Stage 3: Game-Theoretic Strategic Formulation"]
-        H --> I["Multi-Attribute Strategy Design<br/>(Price, Cash/Credit, Pickup Logistics)"]
-        I --> J["Simultaneous Non-Cooperative Game<br/>(BC Strategies vs Competitor Counter-Moves)"]
-        J --> K["Strategic Scoring & Robustness Ranking<br/>(0.7 × Profit + 0.3 × Choice Share)"]
-        K --> L["Selection of Dominant Strategy<br/>(BC Service Plus)"]
-    end
+3. **Stage 3: Game-Theoretic Strategic Formulation**
+   - Formulate a simultaneous non-cooperative game between the Baling Center and regional competing buyers.
+   - Construct multi-attribute strategy profiles spanning purchase pricing, payment conditions (cash on delivery vs. credit terms), and pickup logistics.
+   - Derive the strategic payoff matrix across varying levels of supplier price sensitivity.
+   - Calculate composite strategic scores balancing profitability and volume market capture to identify dominant best-response strategies.
 
-    subgraph S4["Stage 4: Stochastic Risk & Uncertainty Quantification"]
-        L --> M["Monte Carlo Simulation<br/>(N = 10,000 Iterations)"]
-        M --> N["Coupled Shocks Injection<br/>(Probability Shocks & Volume Volatility)"]
-        N --> O["Downside Risk & VaR Assessment<br/>(P5 Worst Case, P50 Median, P95 Best Case)"]
-    end
-```
+4. **Stage 4: Stochastic Risk & Uncertainty Quantification**
+   - Stress-test the preferred procurement strategy using Monte Carlo simulation under simultaneous stochastic shocks.
+   - Inject behavioral participation shocks and operational volume volatility.
+   - Evaluate downside risk, Value-at-Risk profiles, and capital resilience across worst-case, base-case, and upside scenarios.
 
 ---
 
@@ -147,14 +138,14 @@ $$P_n(Y = 1 \mid \mathbf{x}_n) = \frac{\exp(\mathbf{x}_n^\top \boldsymbol{\beta}
 #### Candidate Feature Definitions
 1. **`Quality_Index`**: Composite index evaluating wastepaper material cleanliness and moisture retention:
    $$\text{Quality Index} = \frac{(4 - \text{Moisture Score}) + (4 - \text{Impurities Score})}{2}$$
-2. **`Source_Radius`**: Geographical road distance between supplier warehouse and the Baling Center ($\text{km}$).
+2. **`Source_Radius`**: Geographical road distance between supplier warehouse and the Baling Center.
 3. **`Business_Age`**: Number of years the supplier has been in commercial operation:
    $$\text{Business Age} = \text{Current Year} - \text{Founding Year}$$
 4. **`Supplier_Margin`**: Current trading margin captured by the supplier:
    $$\text{Supplier Margin} = P_{\text{current buyer}} - P_{\text{purchase}}$$
 5. **`Payment_Match`**: Binary indicator ($1$ if BC payment terms match the supplier's preferred settlement timeline, $0$ otherwise).
 6. **`Pickup_Match`**: Binary indicator ($1$ if the supplier requires on-site vehicle collection logistics, $0$ otherwise).
-7. **`Weekly_Volume`**: Historical average collection capacity ($\text{tons/week}$).
+7. **`Weekly_Volume`**: Historical average collection capacity.
 8. **`Skema_Potongan_DQC`**: Deduction scheme applied during factory gate quality inspection.
 
 #### Parameter Estimation & Selection
@@ -168,19 +159,21 @@ where $k$ is the number of parameters and $\hat{L}$ is the maximized likelihood.
 
 ### Stage 2: Purchase Price Optimization
 
-To evaluate purchase price decisions in isolation, multiple pricing adjustment scenarios $\Delta P \in \{-100, -50, 0, +50, +100, +150, +200\}$ $\text{IDR/kg}$ were simulated relative to the baseline expectation.
+To evaluate purchase price decisions in isolation, multiple pricing adjustment scenarios $\Delta P$ were simulated relative to baseline market expectations.
 
-For each supplier $n$, the adjusted purchase price is $P_{n}^{\text{buy}} = P_{n}^{\text{expected}} + \Delta P$.
+For each supplier $n$, the adjusted purchase price is modeled as:
 
-The total expected weekly volume acquired is given by:
+$$P_{n}^{\text{buy}} = P_{n}^{\text{expected}} + \Delta P$$
+
+The total expected volume acquired is given by:
 
 $$\mathbb{E}[\text{Volume}] = \sum_{n=1}^{N} P_n(\Delta P) \cdot \text{Volume}_n$$
 
-The expected weekly procurement profit function balances increased supply capture against reduced operating margin:
+The expected procurement profit function balances increased supply capture against reduced operating margin:
 
-$$\mathbb{E}[\Pi(\Delta P)] = \sum_{n=1}^{N} \Big[ P_n(\Delta P) \cdot \text{Volume}_n \cdot 1000 \cdot \big(\bar{P}_{\text{mill}} - P_n^{\text{buy}}\big) \Big]$$
+$$\mathbb{E}[\Pi(\Delta P)] = \sum_{n=1}^{N} \Big[ P_n(\Delta P) \cdot \text{Volume}_n \cdot C \cdot \big(\bar{P}_{\text{mill}} - P_n^{\text{buy}}\big) \Big]$$
 
-Where $\bar{P}_{\text{mill}}$ is the downstream sales price realized upon selling baled material to the paper mill.
+Where $\bar{P}_{\text{mill}}$ is the downstream sales price realized upon selling baled material to the paper mill and $C$ is the mass conversion constant.
 
 ---
 
@@ -192,14 +185,14 @@ $$\Gamma = \langle \mathcal{N}, \{\mathcal{S}_i\}_{i \in \mathcal{N}}, \{\Pi_i\}
 
 - **Players $\mathcal{N}$**: $\{\text{Baling Center (BC)}, \text{Regional Competitor Buyers}\}$.
 - **BC Action Space $\mathcal{S}_{\text{BC}}$**:
-  - `BC_Basic`: Baseline price ($\Delta P = 0$), standard terms, no vehicle pickup.
-  - `BC_Premium`: Aggressive price incentive ($\Delta P = +100$), standard terms, vehicle pickup included.
-  - `BC_Service_Plus`: Moderate price incentive ($\Delta P = +50$), cash/instant payment matching, vehicle pickup included.
-  - `BC_Aggressive`: Maximum price hike ($\Delta P = +150$), standard terms, vehicle pickup included.
+  - `BC_Basic`: Baseline price, standard terms, no vehicle pickup.
+  - `BC_Premium`: Aggressive price incentive, standard terms, vehicle pickup included.
+  - `BC_Service_Plus`: Moderate price incentive, cash/instant payment matching, vehicle pickup included.
+  - `BC_Aggressive`: Maximum price hike, standard terms, vehicle pickup included.
 - **Competitor Action Space $\mathcal{S}_{\text{Comp}}$**:
-  - `Competitor_Cash_Pickup`: Matching logistics and cash terms at baseline price ($\Delta P = 0$).
-  - `Competitor_Low_Price`: Aggressive cost suppression ($\Delta P = -100$) with standard services.
-  - `Competitor_Price_Match`: Retaliatory price matching ($\Delta P = +100$) with full services.
+  - `Competitor_Cash_Pickup`: Matching logistics and cash terms at baseline price.
+  - `Competitor_Low_Price`: Aggressive cost suppression with standard services.
+  - `Competitor_Price_Match`: Retaliatory price matching with full services.
 
 #### Multi-Attribute Utility & Payoff Function
 The relative choice probability for each strategy pair is governed by relative utility across price margins and service amenities:
@@ -211,51 +204,60 @@ $$P_{\text{BC}} = \frac{\exp(U_{\text{BC}})}{\exp(U_{\text{BC}}) + \exp(U_{\text
 #### Multi-Objective Strategic Evaluation
 To prevent margin destruction while defending supplier volume share, strategies were ranked using a composite **Strategic Score**:
 
-$$\text{Strategic Score} = 0.7 \cdot \left(\frac{\mathbb{E}[\Pi]}{\max \mathbb{E}[\Pi]}\right) + 0.3 \cdot \left(\frac{P_{\text{BC}}}{\max P_{\text{BC}}}\right)$$
+$$\text{Strategic Score} = w_1 \cdot \left(\frac{\mathbb{E}[\Pi]}{\max \mathbb{E}[\Pi]}\right) + w_2 \cdot \left(\frac{P_{\text{BC}}}{\max P_{\text{BC}}}\right)$$
+
+where $w_1$ and $w_2$ represent management weights assigned to profit realization and market capture share, respectively.
 
 ---
 
 ### Stage 4: Monte Carlo Risk & Uncertainty Quantification
 
-To stress-test the selected optimal strategy against market turbulence, a **Monte Carlo simulation ($N = 10,000$ iterations)** was executed. In each iteration $k$:
+To stress-test the selected optimal strategy against market turbulence, a **Monte Carlo simulation** was executed across repeated iterations. In each iteration $k$:
 
-1. **Participation Probability Shock**:
-   $$\tilde{P}_{n, k} = \text{clip}\Big( P_n + \varepsilon_{n, k}^{P},\; 0,\; 1 \Big), \quad \varepsilon_{n, k}^{P} \sim \mathcal{N}(0, \sigma_P^2 = 0.05^2)$$
-2. **Supply Volume Volatility**:
-   $$\tilde{V}_{n, k} = V_n \cdot (1 + \varepsilon_{n, k}^{V}), \quad \varepsilon_{n, k}^{V} \sim \mathcal{N}(0, \sigma_V^2 = 0.10^2)$$
-3. **Simulated Realized Profit**:
-   $$\Pi_k = \sum_{n=1}^N \Big[ \tilde{P}_{n, k} \cdot \tilde{V}_{n, k} \cdot 1000 \cdot (\bar{P}_{\text{mill}} - P_n^{\text{buy}}) \Big]$$
+1. **Participation Probability Shock**:  
+   The baseline supplier choice probability is subjected to a stochastic perturbation:
 
-Empirical quantiles were evaluated at the $5^{\text{th}}$ percentile (Worst-Case Value-at-Risk), $50^{\text{th}}$ percentile (Base Case Median), and $95^{\text{th}}$ percentile (Best-Case Upside).
+   $$\tilde{P}_{n, k} = \max\left(0, \min\left(1, P_n + \varepsilon_{n, k}^{P}\right)\right)$$
+
+   where $\varepsilon_{n, k}^{P} \sim \mathcal{N}(0, \sigma_P^2)$ represents random behavioral fluctuation.
+
+2. **Supply Volume Volatility**:  
+   Individual supply volume fluctuates according to operational shocks:
+
+   $$\tilde{V}_{n, k} = V_n \cdot (1 + \varepsilon_{n, k}^{V})$$
+
+   where $\varepsilon_{n, k}^{V} \sim \mathcal{N}(0, \sigma_V^2)$ reflects weekly delivery variance.
+
+3. **Simulated Realized Profit**:  
+   Total realized procurement profit for iteration $k$ is calculated as:
+
+   $$\Pi_k = \sum_{n=1}^N \Big[ \tilde{P}_{n, k} \cdot \tilde{V}_{n, k} \cdot C \cdot (\bar{P}_{\text{mill}} - P_n^{\text{buy}}) \Big]$$
+
+Empirical quantiles were evaluated across the distribution: Worst-Case Value-at-Risk ($5^{\text{th}}$ percentile), Base-Case Median ($50^{\text{th}}$ percentile), and Best-Case Upside ($95^{\text{th}}$ percentile).
 
 ---
 
 ## 📊 Empirical Findings & Strategic Insights
 
 > [!NOTE]
-> The summary metrics below reflect high-level normalized findings documented in the accepted research paper.
+> In compliance with commercial non-disclosure guidelines, the insights below summarize qualitative and strategic conclusions from the research without citing proprietary transactional figures.
 
 ### 1. Econometric Model Performance
-- **Goodness-of-Fit**: Log-Likelihood improved from null ($-69.17$) to final model ($-52.88$), yielding a McFadden's Pseudo $R^2 \approx 0.235$ (LR Test $p < 0.001$).
-- **Classification Power**: Area Under the ROC Curve ($\text{AUC}$) of **0.790** and overall classification accuracy of **77.2%** at the default threshold ($\tau = 0.50$).
+- **Goodness-of-Fit**: The logit model demonstrated substantial convergence improvement over the null baseline, with the Likelihood Ratio test confirming high collective statistical significance across selected variables.
+- **Classification & Discriminative Power**: The estimated model achieved strong discriminative ability (evaluated via ROC curve and classification accuracy), reliably differentiating between suppliers with high conversion potential and those committed to incumbent channels.
 
-### 2. Behavioral Elasticities & Odds Ratios
-- **Material Quality Index ($\text{OR} = 5.14$, Marginal Effect $\approx +30.77\%$)**: Material cleanliness is the single strongest determinant of partnership viability; clean wastepaper streams significantly lower sorting costs and ensure sustainable mutual margins.
-- **Business Longevity ($\text{OR} = 0.906$, Marginal Effect $\approx -1.87\%$ per year)**: Established scrap dealers exhibit strong vendor inertia and longstanding loyalty to incumbent buyers, requiring targeted relationship building rather than blanket price offers.
-- **Sourcing Radius ($\text{OR} = 1.075$, Marginal Effect $\approx +1.36\%$ per km)**: Suppliers located further away show higher propensity to partner when logistics/pickup support is extended, mitigating distance penalties.
+### 2. Behavioral Elasticities & Determinants of Choice
+- **Material Quality Index (Strongest Positive Driver)**: Material cleanliness and low moisture/impurity levels represent the single most powerful determinant of partnership viability. High-quality wastepaper streams substantially reduce downstream sorting costs, enabling sustainable bilateral collaboration.
+- **Business Longevity & Vendor Inertia**: Long-established suppliers exhibit significant inertia and strong loyalty toward existing buyers. Acquiring mature suppliers requires relational trust and tailored service packages rather than generic pricing adjustments.
+- **Sourcing Radius & Transportation Logistics**: Sourcing distance serves as a natural friction point. However, providing dedicated vehicle pickup and transportation assistance effectively overcomes geographic distance, expanding the feasible procurement radius.
 
 ### 3. Price-Only vs. Multi-Attribute Strategy Comparison
-- **Price-Only Optimum**: A price adjustment of $+100$ IDR/kg maximized single-agent static profit ($55.70$ million IDR index). However, it remains highly vulnerable to retaliatory bidding wars.
-- **Game-Theoretic Dominance**: The **`BC_Service_Plus`** strategy ($\Delta P = +50$ IDR/kg + vehicle pickup + cash terms) consistently achieved the highest average Strategic Score across competitor counter-strategies and across all levels of supplier price sensitivity ($\beta \in [0.005, 0.020]$).
+- **Limitations of Price-Only Policies**: While unconstrained price increases improve supplier conversion in the short run, they rapidly compress gross operational margins. In competitive markets, unilateral price increases trigger retaliatory bidding by competitors, leaving buyers with thinner margins and volatile supply.
+- **Game-Theoretic Dominance of Service Bundling**: The strategy combining **moderate pricing incentives, on-site vehicle pickup, and flexible payment settlement (`BC_Service_Plus`)** proved strategically dominant. It consistently outperformed aggressive price-war strategies across all evaluated competitor counter-moves and across varying levels of supplier price sensitivity.
 
-### 4. Risk & Financial Resilience ($10,000$ Monte Carlo Runs)
-| Risk Metric | Simulated Outcome (Weekly) | Strategic Implication |
-| :--- | :---: | :--- |
-| **Expected Mean Profit** | **~31.59M IDR** | Strong operational margin buffer |
-| **Standard Deviation** | **~0.81M IDR** | Low coefficient of variation ($\text{CV} \approx 2.5\%$) |
-| **Worst-Case Scenario ($P_{05}$)** | **~30.26M IDR** | High downside capital protection |
-| **Best-Case Scenario ($P_{95}$)** | **~32.96M IDR** | Healthy volume expansion ceiling |
-| **Probability of Loss ($\Pi < 0$)** | **0.00%** | Zero simulated negative-margin outcomes |
+### 4. Risk Resilience Under Market Uncertainty
+- **Downside Protection**: Monte Carlo simulations confirmed that the service-oriented procurement strategy maintains robust profitability across stochastic market shocks.
+- **Zero Loss Probability**: Even under combined downside volume drops and behavioral conversion fluctuations, simulated outcomes remained safely positive, validating that service-differentiated procurement acts as an effective operational buffer against market volatility.
 
 ---
 
@@ -319,7 +321,7 @@ pip install -r requirements.txt
 ### 4. Generate Synthetic Data
 To execute the pipeline safely without accessing proprietary corporate records, run the synthetic dataset generator:
 ```bash
-python src/generate_synthetic_data.py --samples 101 --output data/sample_suppliers.csv
+python src/generate_synthetic_data.py --samples 100 --output data/sample_suppliers.csv
 ```
 
 ### 5. Run the End-to-End Pipeline
@@ -369,7 +371,7 @@ jobs:
 
       - name: Generate Synthetic Benchmark Data
         run: |
-          python src/generate_synthetic_data.py --samples 101 --output data/sample_suppliers.csv
+          python src/generate_synthetic_data.py --samples 100 --output data/sample_suppliers.csv
 
       - name: Run Econometric & Game Theory Tests
         run: |
@@ -397,7 +399,7 @@ If you find this methodology, econometric formulation, or game-theoretic framewo
 
 ```bibtex
 @article{tsuraya2026procurement,
-  author    = {Shafa Fariha Tsuraya and Noviyanti Santoso},
+  author    = {Shafa Fariha Tsuraya},
   title     = {Integrating Discrete Choice Modeling and Game Theoretic Optimization for Supplier Selection and Procurement Strategy in Wastepaper Recycling Supply Chains},
   journal   = {Peer-Reviewed Academic Journal},
   year      = {2026},
