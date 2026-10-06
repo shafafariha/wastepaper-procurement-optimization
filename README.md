@@ -123,57 +123,69 @@ The framework synthesizes behavioral econometrics, mathematical optimization, ga
 
 ### Stage 1: Discrete Choice Modeling (Random Utility Theory)
 
-The supplier's decision to sell to the Baling Center is grounded in **Random Utility Theory (RUT)**. A supplier $n$ chooses alternative $i \in \{0, 1\}$ (where $1$ denotes choosing the Baling Center and $0$ denotes selecting an alternative buyer or retaining current channels) if and only if the perceived utility $U_{ni}$ exceeds all alternative utilities:
+The supplier's decision to sell to the Baling Center is grounded in **Random Utility Theory (RUT)**. A supplier `n` chooses alternative `i` in `{0, 1}` (where `1` denotes choosing the Baling Center and `0` denotes selecting an alternative buyer or retaining current channels) if and only if the perceived utility `U_ni` exceeds all alternative utilities:
 
-$$U_{ni} = V_{ni} + \varepsilon_{ni}$$
+$$
+U_{ni} = V_{ni} + \varepsilon_{ni}
+$$
 
 Where:
-- $V_{ni} = \mathbf{x}_{ni}^\top \boldsymbol{\beta}$ is the deterministic systematic component explained by observable economic, operational, and material attributes.
-- $\varepsilon_{ni}$ is the unobserved stochastic error term, assumed to follow an Independent and Identically Distributed (i.i.d.) Type I Extreme Value (Gumbel) distribution.
+- `V_ni` represents the deterministic systematic component explained by observable economic, operational, and material attributes.
+- `ε_ni` represents the unobserved stochastic error term, assumed to follow an Independent and Identically Distributed (i.i.d.) Type I Extreme Value (Gumbel) distribution.
 
-Under these standard assumptions, the probability $P_n$ that supplier $n$ selects the Baling Center takes the closed-form **Binary Logistic formulation**:
+Under these standard assumptions, the probability `P_n` that supplier `n` selects the Baling Center takes the closed-form **Binary Logistic formulation**:
 
-$$P_n(Y = 1 \mid \mathbf{x}_n) = \frac{\exp(\mathbf{x}_n^\top \boldsymbol{\beta})}{1 + \exp(\mathbf{x}_n^\top \boldsymbol{\beta})} = \frac{1}{1 + \exp(-\mathbf{x}_n^\top \boldsymbol{\beta})}$$
+$$
+P_n(Y = 1 \mid \mathbf{x}_n) = \frac{\exp(\mathbf{x}_n^\top \boldsymbol{\beta})}{1 + \exp(\mathbf{x}_n^\top \boldsymbol{\beta})} = \frac{1}{1 + \exp(-\mathbf{x}_n^\top \boldsymbol{\beta})}
+$$
 
 #### Candidate Feature Definitions
 1. **`Quality_Index`**: Composite index evaluating wastepaper material cleanliness and moisture retention:
    $$\text{Quality Index} = \frac{(4 - \text{Moisture Score}) + (4 - \text{Impurities Score})}{2}$$
-2. **`Source_Radius`**: Geographical road distance between supplier warehouse and the Baling Center.
-3. **`Business_Age`**: Number of years the supplier has been in commercial operation:
-   $$\text{Business Age} = \text{Current Year} - \text{Founding Year}$$
-4. **`Supplier_Margin`**: Current trading margin captured by the supplier:
-   $$\text{Supplier Margin} = P_{\text{current buyer}} - P_{\text{purchase}}$$
-5. **`Payment_Match`**: Binary indicator ($1$ if BC payment terms match the supplier's preferred settlement timeline, $0$ otherwise).
-6. **`Pickup_Match`**: Binary indicator ($1$ if the supplier requires on-site vehicle collection logistics, $0$ otherwise).
-7. **`Weekly_Volume`**: Historical average collection capacity.
+2. **`Source_Radius`**: Geographical road distance between supplier warehouse and the Baling Center (km).
+3. **`Business_Age`**: Number of years the supplier has been in commercial operation:  
+   `Business Age = Current Year - Founding Year`
+4. **`Supplier_Margin`**: Current trading margin captured by the supplier:  
+   `Supplier Margin = Current Selling Price - Purchase Cost`
+5. **`Payment_Match`**: Binary indicator (1 if BC payment terms match the supplier's preferred settlement timeline, 0 otherwise).
+6. **`Pickup_Match`**: Binary indicator (1 if the supplier requires on-site vehicle collection logistics, 0 otherwise).
+7. **`Weekly_Volume`**: Historical average collection capacity (tons/week).
 8. **`Skema_Potongan_DQC`**: Deduction scheme applied during factory gate quality inspection.
 
 #### Parameter Estimation & Selection
 Parameters were estimated via **Maximum Likelihood Estimation (MLE)**. Parsimonious specification was achieved using **Backward Stepwise Selection based on Akaike Information Criterion (AIC)**:
 
-$$\text{AIC} = 2k - 2\ln(\hat{L})$$
+$$
+\text{AIC} = 2k - 2\ln(\hat{L})
+$$
 
-where $k$ is the number of parameters and $\hat{L}$ is the maximized likelihood.
+where `k` is the number of parameters and `L` is the maximized likelihood.
 
 ---
 
 ### Stage 2: Purchase Price Optimization
 
-To evaluate purchase price decisions in isolation, multiple pricing adjustment scenarios $\Delta P$ were simulated relative to baseline market expectations.
+To evaluate purchase price decisions in isolation, multiple pricing adjustment scenarios `ΔP` were simulated relative to baseline market expectations.
 
-For each supplier $n$, the adjusted purchase price is modeled as:
+For each supplier `n`, the adjusted purchase price is modeled as:
 
-$$P_{n}^{\text{buy}} = P_{n}^{\text{expected}} + \Delta P$$
+$$
+P_n^{\text{buy}} = P_n^{\text{expected}} + \Delta P
+$$
 
 The total expected volume acquired is given by:
 
-$$\mathbb{E}[\text{Volume}] = \sum_{n=1}^{N} P_n(\Delta P) \cdot \text{Volume}_n$$
+$$
+\mathbb{E}[\text{Volume}] = \sum_{n=1}^{N} P_n(\Delta P) \cdot \text{Volume}_n
+$$
 
 The expected procurement profit function balances increased supply capture against reduced operating margin:
 
-$$\mathbb{E}[\Pi(\Delta P)] = \sum_{n=1}^{N} \Big[ P_n(\Delta P) \cdot \text{Volume}_n \cdot C \cdot \big(\bar{P}_{\text{mill}} - P_n^{\text{buy}}\big) \Big]$$
+$$
+\mathbb{E}[\Pi(\Delta P)] = \sum_{n=1}^{N} \Big[ P_n(\Delta P) \cdot \text{Volume}_n \cdot C \cdot \big(\bar{P}_{\text{mill}} - P_n^{\text{buy}}\big) \Big]
+$$
 
-Where $\bar{P}_{\text{mill}}$ is the downstream sales price realized upon selling baled material to the paper mill and $C$ is the mass conversion constant.
+Where `P_mill` is the downstream sales price realized upon selling baled material to the paper mill and `C` is the mass conversion constant.
 
 ---
 
@@ -181,15 +193,17 @@ Where $\bar{P}_{\text{mill}}$ is the downstream sales price realized upon sellin
 
 Because competitors inevitably react to unilateral pricing moves, procurement was modeled as a **Non-Cooperative Simultaneous Game in Normal Form**:
 
-$$\Gamma = \langle \mathcal{N}, \{\mathcal{S}_i\}_{i \in \mathcal{N}}, \{\Pi_i\}_{i \in \mathcal{N}} \rangle$$
+$$
+\Gamma = \langle \mathcal{N}, \{\mathcal{S}_i\}, \{\Pi_i\} \rangle
+$$
 
-- **Players $\mathcal{N}$**: $\{\text{Baling Center (BC)}, \text{Regional Competitor Buyers}\}$.
-- **BC Action Space $\mathcal{S}_{\text{BC}}$**:
+- **Players**: Baling Center (BC) and Regional Competitor Buyers.
+- **BC Action Space**:
   - `BC_Basic`: Baseline price, standard terms, no vehicle pickup.
   - `BC_Premium`: Aggressive price incentive, standard terms, vehicle pickup included.
   - `BC_Service_Plus`: Moderate price incentive, cash/instant payment matching, vehicle pickup included.
   - `BC_Aggressive`: Maximum price hike, standard terms, vehicle pickup included.
-- **Competitor Action Space $\mathcal{S}_{\text{Comp}}$**:
+- **Competitor Action Space**:
   - `Competitor_Cash_Pickup`: Matching logistics and cash terms at baseline price.
   - `Competitor_Low_Price`: Aggressive cost suppression with standard services.
   - `Competitor_Price_Match`: Retaliatory price matching with full services.
@@ -197,43 +211,55 @@ $$\Gamma = \langle \mathcal{N}, \{\mathcal{S}_i\}_{i \in \mathcal{N}}, \{\Pi_i\}
 #### Multi-Attribute Utility & Payoff Function
 The relative choice probability for each strategy pair is governed by relative utility across price margins and service amenities:
 
-$$U_{\text{BC}} = \beta_{\text{price}} \cdot \text{Margin}_{\text{BC}} + \beta_{\text{payment}} \cdot \text{Pay}_{\text{BC}} + \beta_{\text{pickup}} \cdot \text{Pick}_{\text{BC}} + \beta_{\text{qual}} \cdot \text{Quality}$$
+$$
+U_{\text{BC}} = \beta_{\text{price}} \cdot \text{Margin}_{\text{BC}} + \beta_{\text{payment}} \cdot \text{Pay}_{\text{BC}} + \beta_{\text{pickup}} \cdot \text{Pick}_{\text{BC}} + \beta_{\text{qual}} \cdot \text{Quality}
+$$
 
-$$P_{\text{BC}} = \frac{\exp(U_{\text{BC}})}{\exp(U_{\text{BC}}) + \exp(U_{\text{Comp}})}$$
+$$
+P_{\text{BC}} = \frac{\exp(U_{\text{BC}})}{\exp(U_{\text{BC}}) + \exp(U_{\text{Comp}})}
+$$
 
 #### Multi-Objective Strategic Evaluation
 To prevent margin destruction while defending supplier volume share, strategies were ranked using a composite **Strategic Score**:
 
-$$\text{Strategic Score} = w_1 \cdot \left(\frac{\mathbb{E}[\Pi]}{\max \mathbb{E}[\Pi]}\right) + w_2 \cdot \left(\frac{P_{\text{BC}}}{\max P_{\text{BC}}}\right)$$
+$$
+\text{Strategic Score} = w_1 \cdot \left(\frac{\mathbb{E}[\Pi]}{\max \mathbb{E}[\Pi]}\right) + w_2 \cdot \left(\frac{P_{\text{BC}}}{\max P_{\text{BC}}}\right)
+$$
 
-where $w_1$ and $w_2$ represent management weights assigned to profit realization and market capture share, respectively.
+where `w_1` and `w_2` represent management weights assigned to profit realization and market capture share, respectively.
 
 ---
 
 ### Stage 4: Monte Carlo Risk & Uncertainty Quantification
 
-To stress-test the selected optimal strategy against market turbulence, a **Monte Carlo simulation** was executed across repeated iterations. In each iteration $k$:
+To evaluate the financial resilience and robustness of the procurement strategy against market volatility, repeated Monte Carlo simulation iterations were conducted under coupled stochastic shocks. In each simulation iteration:
 
-1. **Participation Probability Shock**:  
-   The baseline supplier choice probability is subjected to a stochastic perturbation:
+1. **Participation Probability Shock**  
+   The baseline supplier choice probability is subjected to a stochastic behavioral perturbation, strictly bounded between 0 and 1:
 
-   $$\tilde{P}_{n, k} = \max\left(0, \min\left(1, P_n + \varepsilon_{n, k}^{P}\right)\right)$$
+$$
+\tilde{P}_n = \max\left(0, \min\left(1, P_n + \varepsilon_n^P\right)\right)
+$$
 
-   where $\varepsilon_{n, k}^{P} \sim \mathcal{N}(0, \sigma_P^2)$ represents random behavioral fluctuation.
+   *where ε_n^P is a zero-mean normally distributed random shock representing behavioral fluctuation.*
 
-2. **Supply Volume Volatility**:  
-   Individual supply volume fluctuates according to operational shocks:
+2. **Supply Volume Volatility**  
+   Individual supply volume fluctuates according to operational delivery shocks:
 
-   $$\tilde{V}_{n, k} = V_n \cdot (1 + \varepsilon_{n, k}^{V})$$
+$$
+\tilde{V}_n = V_n \cdot (1 + \varepsilon_n^V)
+$$
 
-   where $\varepsilon_{n, k}^{V} \sim \mathcal{N}(0, \sigma_V^2)$ reflects weekly delivery variance.
+   *where ε_n^V represents percentage weekly volume variation.*
 
-3. **Simulated Realized Profit**:  
-   Total realized procurement profit for iteration $k$ is calculated as:
+3. **Simulated Realized Profit**  
+   Total realized procurement profit is calculated across all participating suppliers evaluated against the realized processing margin:
 
-   $$\Pi_k = \sum_{n=1}^N \Big[ \tilde{P}_{n, k} \cdot \tilde{V}_{n, k} \cdot C \cdot (\bar{P}_{\text{mill}} - P_n^{\text{buy}}) \Big]$$
+$$
+\Pi = \sum_{n=1}^N \Big[ \tilde{P}_n \cdot \tilde{V}_n \cdot C \cdot (P_{\text{mill}} - P_n^{\text{buy}}) \Big]
+$$
 
-Empirical quantiles were evaluated across the distribution: Worst-Case Value-at-Risk ($5^{\text{th}}$ percentile), Base-Case Median ($50^{\text{th}}$ percentile), and Best-Case Upside ($95^{\text{th}}$ percentile).
+Empirical quantiles were evaluated across the resulting distribution, assessing downside risk (5th percentile / Value-at-Risk), median baseline performance (50th percentile), and upside capacity potential (95th percentile).
 
 ---
 
