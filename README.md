@@ -1,4 +1,4 @@
-# 📦 Behavioral Discrete Choice Modeling & Game-Theoretic Optimization for Wastepaper Recycling Procurement
+# Behavioral Discrete Choice Modeling & Game-Theoretic Optimization for Wastepaper Recycling Procurement
 
 [![Paper Status](https://img.shields.io/badge/Research%20Paper-Accepted%20(Forthcoming)-0052CC?style=for-the-badge&logo=googlescholar&logoColor=white)](#-academic-publication--status)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -12,7 +12,7 @@
 
 ---
 
-## 📌 Table of Contents
+## Table of Contents
 - [Executive Summary](#-executive-summary)
 - [Academic Publication & Status](#-academic-publication--status)
 - [Data Governance & Confidentiality Notice](#-data-governance--confidentiality-notice)
@@ -33,7 +33,7 @@
 
 ---
 
-## 📖 Executive Summary
+## Executive Summary
 
 In circular economy supply chains, **Baling Centers (BC)** operate as pivotal consolidation hubs responsible for aggregating, inspecting, compacting, and delivering recovered wastepaper (OCC, ONP, and mixed grades) to downstream paper mills. However, raw material acquisition in wastepaper markets is notoriously decentralized, price-volatile, and driven by informal supplier networks. Traditional procurement models rely predominantly on deterministic single-attribute pricing, often overlooking that suppliers evaluate buyers based on a complex bundle of operational attributes, including payment immediacy, collection/transportation assistance, quality deduction thresholds, and business relationship tenure.
 
@@ -45,7 +45,7 @@ This project delivers an **end-to-end behavioral procurement optimization framew
 
 ---
 
-## 📑 Academic Publication & Status
+## Academic Publication & Status
 
 This project corresponds to the empirical methodology and analytical framework developed in the following academic research:
 
@@ -56,7 +56,7 @@ This project corresponds to the empirical methodology and analytical framework d
 
 ---
 
-## 🔒 Data Governance & Confidentiality Notice
+## Data Governance & Confidentiality Notice
 
 > [!IMPORTANT]
 > **Commercial Non-Disclosure & Data Sanitization Policy**  
@@ -69,7 +69,7 @@ This project corresponds to the empirical methodology and analytical framework d
 
 ---
 
-## 🏭 Industry Background & Problem Statement
+## Industry Background & Problem Statement
 
 ```plaintext
 [ Informal Collectors / Waste Banks / Aggregators ]
@@ -91,7 +91,7 @@ Recovered paper is an indispensable circular feedstock for paper packaging manuf
 
 ---
 
-## 🔄 Integrated Decision Framework Architecture
+## Integrated Decision Framework Architecture
 
 The framework synthesizes behavioral econometrics, mathematical optimization, game-theoretic strategy, and stochastic risk analysis into a sequential four-stage decision workflow:
 
@@ -119,7 +119,7 @@ The framework synthesizes behavioral econometrics, mathematical optimization, ga
 
 ---
 
-## 🔬 Methodology & Mathematical Formulations
+## Methodology & Mathematical Formulations
 
 ### Stage 1: Discrete Choice Modeling (Random Utility Theory)
 
@@ -263,7 +263,7 @@ Empirical quantiles were evaluated across the resulting distribution, assessing 
 
 ---
 
-## 📊 Empirical Findings & Strategic Insights
+## Empirical Findings & Strategic Insights
 
 > [!NOTE]
 > In compliance with commercial non-disclosure guidelines, the insights below summarize qualitative and strategic conclusions from the research without citing proprietary transactional figures.
@@ -287,7 +287,7 @@ Empirical quantiles were evaluated across the resulting distribution, assessing 
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```plaintext
 wastepaper-procurement-optimization/
@@ -318,7 +318,7 @@ wastepaper-procurement-optimization/
 
 ---
 
-## 🚀 Installation & Reproducibility Guide
+## Installation & Reproducibility Guide
 
 ### 1. Clone the Repository
 ```bash
@@ -364,7 +364,7 @@ jupyter notebook notebooks/procurement_analysis.ipynb
 
 ---
 
-## 🤖 Automated Pipeline & CI/CD Workflow
+## Automated Pipeline & CI/CD Workflow
 
 This repository includes an automated GitHub Actions workflow (`.github/workflows/ci.yml`) to ensure full reproducibility and publication-ready health checks upon every push:
 
@@ -406,7 +406,7 @@ jobs:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Domain | Tools & Libraries |
 | :--- | :--- |
@@ -419,7 +419,7 @@ jobs:
 
 ---
 
-## 📑 Citation
+## Citation
 
 If you find this methodology, econometric formulation, or game-theoretic framework useful in your research or industrial operations, please cite the forthcoming paper:
 
@@ -435,7 +435,7 @@ If you find this methodology, econometric formulation, or game-theoretic framewo
 
 ---
 
-## 👤 Author & Contact
+## Author & Contact
 
 **Shafa Fariha Tsuraya**  
 - **Role**: Market Research Analyst / Data & AI Engineer  
